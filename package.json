@@ -23,7 +23,7 @@
     "webpack-dev-server": "^4.11.1"
   },
   "dependencies": {
-    "peasy-ui": "^0.9.16",
+    "peasy-ui": "^0.9.17",
     "peerjs": "^1.4.7"
   }
 }
