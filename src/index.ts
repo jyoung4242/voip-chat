@@ -9,12 +9,12 @@ if ("mediaDevices" in navigator && "getUserMedia" in navigator.mediaDevices) {
 }
 
 const peer = new Peer();
-// \${value<=>remoteID
+// \${value<=>remoteID  id="peerID" type="text" class="peerinput" name="peerID"
 const template = `
 <div>
     <div>
         <label for="peerID"> Peer ID </label>
-        <input id="peerID" type="text" class="peerinput" name="peerID" \${value<=>remoteID}}>
+        <input name="peerID"  type="text" value="" \${value<=>remoteID}>
         <p> my id is: </p> <span>\${myID}</span>
         
     </div>
@@ -40,15 +40,12 @@ const template = `
 </div>`;
 
 const model = {
-  makeCall: (_event: any, model: any, element: any) => {
-    console.log(element);
+  makeCall: (_event: any, model: any, element: any, attribute: any, object: any) => {
     const target = parseInt(element.id.split("_")[1]);
-    const source = model.myIndex;
-    model.remoteID = (document.getElementById("peerID") as HTMLInputElement).value;
-    console.log(target, source);
+    const source = object.$parent.$model.myIndex;
+    const remoteID = parseInt(object.$parent.$model.remoteID);
     if (target == source) return;
-    if (model.remoteID == undefined) return;
-    console.log("here");
+    if (remoteID == undefined) return;
     const theirID = model.remoteID;
     console.log("calling: ", theirID);
     call(theirID, target, source, true);
